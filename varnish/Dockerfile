@@ -23,20 +23,18 @@ RUN \
 
 # Install Varnish from source, so that Varnish modules
 # can be compiled and installed
-ENV VARNISH_VERSION=4.1.0
-ENV VARNISH_SHA256SUM=4a6ea08e30b62fbf25f884a65f0d8af42e9cc9d25bf70f45ae4417c4f1c99017
-RUN \
-  apt-get update && \
-  mkdir -p /usr/local/src && \
+ENV VARNISH_VERSION=4.1.11
+ENV VARNISH_SHA256SUM=f937a45116f3a7fbb38b2b5d7137658a4846409630bb9eccdbbb240e1a1379bc
+RUN apt-get update && \
   cd /usr/local/src && \
-  curl -sfLO https://repo.varnish-cache.org/source/varnish-$VARNISH_VERSION.tar.gz && \
-  echo "${VARNISH_SHA256SUM} varnish-$VARNISH_VERSION.tar.gz" | sha256sum -c - && \
-  tar -xzf varnish-$VARNISH_VERSION.tar.gz && \
+  curl -sfLO http://varnish-cache.org/_downloads/varnish-${VARNISH_VERSION}.tgz && \
+  echo "${VARNISH_SHA256SUM} varnish-$VARNISH_VERSION.tgz" | sha256sum -c - && \
+  tar -xzf varnish-$VARNISH_VERSION.tgz && \
   cd varnish-$VARNISH_VERSION && \
   ./autogen.sh && \
   ./configure && \
   make install && \
-  rm ../varnish-$VARNISH_VERSION.tar.gz
+  rm ../varnish-$VARNISH_VERSION.tgz
 
 # varnishd(1) options
 ENV VARNISH_VCL_PATH /etc/varnish/default.vcl

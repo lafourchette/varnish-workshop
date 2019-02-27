@@ -34,12 +34,15 @@ function handleRequest(req, res){
   }
 
   if (req.url == '/hello') {
+      welcome = ['Bonjour', 'Hello', 'Dzien Dobry', 'Buongiorno', 'Buenos dias', 'Ola']
+      welcomelang = ['fr_FR', 'en_GB', 'pl_PL', 'it_IT', 'es_ES', 'pt_PT']
+      rand = getRandomInt(welcome.length);
       headers = {
           'Content-Type': 'text/html',
-          'Cache-Control': 'no-cache'
+          'Cache-Control': 'no-cache',
+          'Content-Language': welcomelang[rand]
       }
-      welcome = ['Bonjour', 'Hello', 'Dzien Dobry', '', 'Buongiorno', 'Buenos dias', 'Ola']
-      result = welcome[getRandomInt(welcome.length)];
+      result = welcome[rand];
   }
   res.writeHead(200, headers);
   res.end(result);

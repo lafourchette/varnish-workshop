@@ -16,7 +16,10 @@ const html = (req) => (`
 // simple route handler 
 function handleRequest(req, res){
   console.log(`Request received for: ${req.url}`);
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.writeHead(200, {
+      'Content-Type': 'text/html',
+      'Cache-Control': 'no-cache'
+  });
   res.end(html(req));
 }
 

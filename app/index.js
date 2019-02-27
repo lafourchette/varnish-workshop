@@ -20,6 +20,7 @@ function getRandomInt(max) {
 // simple route handler 
 function handleRequest(req, res){
   console.log(`Request received for: ${req.url}`);
+  statuscode= 200
   headers = {
       'Content-Type': 'text/html'
   };
@@ -33,18 +34,42 @@ function handleRequest(req, res){
       result = html(req);
   }
 
+  welcome = {
+      'fr_FR': 'Bonjour',
+      'en_GB': 'Hello',
+      'pl_PL': 'Dzien Dobry',
+      'it_IT': 'Buongiorno',
+      'es_ES': 'Buenos dias',
+      'pt_PT': 'Ola'
+
+  }
+  welcomelang = ['fr_FR', 'en_GB', 'pl_PL', 'it_IT', 'es_ES', 'pt_PT']
+  rand = getRandomInt(welcomelang.length);
+
   if (req.url == '/hello') {
-      welcome = ['Bonjour', 'Hello', 'Dzien Dobry', 'Buongiorno', 'Buenos dias', 'Ola']
-      welcomelang = ['fr_FR', 'en_GB', 'pl_PL', 'it_IT', 'es_ES', 'pt_PT']
-      rand = getRandomInt(welcome.length);
+      rand = welcomelang[rand];
       headers = {
           'Content-Type': 'text/html',
           'Cache-Control': 'no-cache',
-          'Content-Language': welcomelang[rand]
+          'Content-Language': rand
       }
       result = welcome[rand];
   }
-  res.writeHead(200, headers);
+  if (req.url == '/hello-localized') {
+      if (req.headers.hasOwnProperty('locale') === false) {
+        statuscode = 400;
+        result = 'locale header is mandatory'
+      } else {
+          locale = req.headers.locale;
+          headers = {
+              'Content-Type': 'text/html',
+              'Cache-Control': 'no-cache',
+              'Content-Language': locale
+          }
+          result = welcome[locale];
+      }
+  }
+  res.writeHead(statuscode, headers);
   res.end(result);
 }
 

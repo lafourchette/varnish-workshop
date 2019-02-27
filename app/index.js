@@ -13,14 +13,36 @@ const html = (req) => (`
   </html>
 `);
 
+function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+}
+
 // simple route handler 
 function handleRequest(req, res){
   console.log(`Request received for: ${req.url}`);
-  res.writeHead(200, {
-      'Content-Type': 'text/html',
-      'Cache-Control': 'no-cache'
-  });
-  res.end(html(req));
+  headers = {
+      'Content-Type': 'text/html'
+  };
+  result = 'Varnish workshop !';
+
+  if (req.url == '/1') {
+      headers = {
+          'Content-Type': 'text/html',
+          'Cache-Control': 'no-cache'
+      }
+      result = html(req);
+  }
+
+  if (req.url == '/hello') {
+      headers = {
+          'Content-Type': 'text/html',
+          'Cache-Control': 'no-cache'
+      }
+      welcome = ['Bonjour', 'Hello', 'Dzien Dobry', '', 'Buongiorno', 'Buenos dias', 'Ola']
+      result = welcome[getRandomInt(welcome.length)];
+  }
+  res.writeHead(200, headers);
+  res.end(result);
 }
 
 // create the server

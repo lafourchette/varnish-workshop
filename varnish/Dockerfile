@@ -34,6 +34,7 @@ RUN apt-get update && \
   ./autogen.sh && \
   ./configure && \
   make install && \
+  ln -s /usr/local/lib/libvarnishapi.so.1 /usr/local/lib/varnish/ && \
   rm ../varnish-$VARNISH_VERSION.tgz
 
 # varnishd(1) options

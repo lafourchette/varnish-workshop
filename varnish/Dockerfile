@@ -18,6 +18,7 @@ RUN \
     libtool \
     pkg-config \
     python-docutils \
+    vim \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

@@ -55,7 +55,7 @@ function handleRequest(req, res){
       }
       result = welcome[rand];
   }
-  if (req.url == '/hello-localized') {
+  if (req.url == '/hello-2') {
       if (req.headers.hasOwnProperty('locale') === false) {
         statuscode = 400;
         result = 'locale header is mandatory'

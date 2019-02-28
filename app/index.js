@@ -40,7 +40,8 @@ function handleRequest(req, res){
       'pl_PL': 'Dzien Dobry',
       'it_IT': 'Buongiorno',
       'es_ES': 'Buenos dias',
-      'pt_PT': 'Buenos dias'
+      'pt_PT': 'Buenos dias',
+      'pt_BR': 'Bom dia'
 
   }
   welcomelang = ['fr_FR', 'en_GB', 'pl_PL', 'it_IT', 'es_ES', 'pt_PT']

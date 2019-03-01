@@ -9,7 +9,14 @@ sub vcl_recv {
     return (purge);
   }
 }
+
+sub vcl_hash {
+  if (req.http.locale ~ "pt_BR") {
+     set req.http.locale = "pt_PT";
+  }
+}
 sub vcl_deliver {
+
     if (obj.hits > 0) {
         set resp.http.X-Cache = "HIT "+ obj.hits;
     } else {

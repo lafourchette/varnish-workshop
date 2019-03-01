@@ -63,6 +63,7 @@ function handleRequest(req, res){
           locale = req.headers.locale;
           headers = {
               'Content-Type': 'text/html',
+              'Vary': 'locale',
               'Content-Language': locale
           }
           result = welcome[locale];

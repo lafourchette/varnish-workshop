@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # start varnish with various options
-varnishd -j unix,user=varnishd -F -f ${VARNISH_VCL_PATH} -s malloc,${VARNISH_MEMORY} -a 0.0.0.0:${VARNISH_PORT} -p http_req_hdr_len=16384 -p http_resp_hdr_len=16384
+varnishd -j unix,user=varnishd -F -f ${VARNISH_VCL_PATH} -s malloc,${VARNISH_MEMORY} -a 0.0.0.0:${VARNISH_PORT} -T 127.0.0.1:6082 -S /etc/varnish/secret -p http_req_hdr_len=16384 -p http_resp_hdr_len=16384
 
 # start varnishlog (as a daemon) with various options
 # varnishlog -D -B -w ${VARNISHLOG_PATH}

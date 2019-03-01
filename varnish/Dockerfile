@@ -69,6 +69,9 @@ RUN \
   ln -sf /dev/stdout ${VARNISHLOG_PATH} && \
   ln -sf /dev/stdout ${VARNISHNCSA_LOG_PATH}
 
+COPY varnish/varnish-reload.sh /usr/local/bin/varnish-reload.sh
+COPY varnish/secret /etc/varnish/secret
+
 EXPOSE 80
 CMD [ "start-varnish" ]
 

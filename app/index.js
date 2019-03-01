@@ -50,7 +50,7 @@ function handleRequest(req, res){
       rand = welcomelang[rand];
       headers = {
           'Content-Type': 'text/html',
-          'Cache-Control': 'no-cache',
+          'Cache-Control': 'max-age=60',
           'Content-Language': rand
       }
       result = welcome[rand];
